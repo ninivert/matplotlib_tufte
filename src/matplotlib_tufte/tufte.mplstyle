@@ -1,0 +1,36 @@
+# better readability
+font.family: serif
+mathtext.fontset: cm
+font.style: normal
+font.variant: normal
+font.weight: normal
+font.stretch: normal
+font.serif: cm, Latin Modern Roman, DejaVu Serif, New Century Schoolbook, Century Schoolbook L, Utopia, ITC Bookman, Bookman, Nimbus Roman No9 L, Times New Roman, Times, Palatino, Charter, serif
+font.sans-serif: Latin Modern Sans, DejaVu Sans, Lucida Grande, Verdana, Geneva, Lucid, Arial, Helvetica, Avant Garde, sans-serif
+font.monospace: Latin Modern Mono, DejaVu Sans Mono, Andale Mono, Nimbus Mono L, Courier New, Courier, Fixed, Terminal, monospace
+font.size: 12
+# figures can be scaled down generally (this fits nicely in half an a4 page)
+figure.figsize: 4, 3
+figure.dpi: 100
+# remove non-data ink
+axes.spines.top: False
+axes.spines.right: False
+# remove even more non-data ink
+# 'axes.spines.bottom': False
+# 'axes.spines.left': False
+# thinner lines convay more precision
+lines.linewidth: 1
+axes.linewidth: 0.5
+# optimize space
+figure.autolayout: True
+# dimmer axes and ticks
+# 'axes.edgecolor': 'tab:gray',
+# 'xtick.color': 'tab:gray',
+# 'xtick.labelcolor': 'tab:gray',
+# 'ytick.color': 'tab:gray',
+# 'ytick.labelcolor': 'tab:gray',
+# no color when not needed
+axes.prop_cycle: cycler('color', ['000000', '1f77b4', 'ff7f0e', '2ca02c', 'd62728', '9467bd', '8c564b', 'e377c2', '7f7f7f', 'bcbd22', '17becf'])
+# remove chartjunk
+legend.fancybox: False
+legend.frameon: False

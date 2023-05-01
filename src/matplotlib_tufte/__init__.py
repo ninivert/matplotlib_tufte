@@ -3,7 +3,7 @@ import warnings
 import matplotlib.axes
 import matplotlib.pyplot as plt  # needs this to access fontManager
 
-__all__ = ['setup', 'breathe', 'data_lim']
+__all__ = ['setup', 'breathe', 'data_lim', 'despine']
 
 def setup():
 	import pathlib
@@ -23,12 +23,13 @@ class AxisWhich(Enum):
 	Y = 'y'
 	BOTH = 'both'
 
-def breathe(ax: matplotlib.axes.Axes, which = AxisWhich.BOTH, pad_frac_start = 0.04, pad_frac_end = 0.04):
+def breathe(ax: matplotlib.axes.Axes | None = None, which = AxisWhich.BOTH, pad_frac_start = 0.04, pad_frac_end = 0.04):
 	"""Add some space between the axes and the spines
 
 	Parameters
 	----------
-	ax : matplotlib.axes.Axes
+	ax : matplotlib.axes.Axes or None
+		axes to use, if set to ``None`` then ``plt.gca()`` is used
 	which : str or AxisWhich, optional
 		which axis to apply the spacing on, by default AxisWhich.BOTH
 	pad_frac_start : float, optional
@@ -36,6 +37,9 @@ def breathe(ax: matplotlib.axes.Axes, which = AxisWhich.BOTH, pad_frac_start = 0
 	pad_frac_end : float, optional
 		space to add to the end of the axis, as a fraction of the data span, by default 0.04
 	"""
+
+	if ax is None:
+		ax = plt.gca()
 	
 	if not isinstance(which, AxisWhich):
 		which = AxisWhich(which)
@@ -56,15 +60,20 @@ def breathe(ax: matplotlib.axes.Axes, which = AxisWhich.BOTH, pad_frac_start = 0
 		m1 = limy[1] + span*pad_frac_end
 		ax.set_ylim((m0, m1))
 
-def data_lim(ax: matplotlib.axes.Axes, which = AxisWhich.BOTH):
+def data_lim(ax: matplotlib.axes.Axes | None = None, which = AxisWhich.BOTH):
 	"""Sets the axis to use the limits of the data
 
 	Parameters
 	----------
-	ax : matplotlib.axes.Axes
+	ax : matplotlib.axes.Axes or None
+		axes to use, if set to ``None`` then ``plt.gca()`` is used
 	which : str or AxisWhich, optional
 		which axis to apply the spacing on, by default AxisWhich.BOTH
 	"""
+
+	if ax is None:
+		ax = plt.gca()
+
 	if not isinstance(which, AxisWhich):
 		which = AxisWhich(which)
 
@@ -73,6 +82,29 @@ def data_lim(ax: matplotlib.axes.Axes, which = AxisWhich.BOTH):
 
 	if which is AxisWhich.Y or which is AxisWhich.BOTH:
 		ax.set_ylim((ax.dataLim.ymin, ax.dataLim.ymax))
+
+def despine(ax: matplotlib.axes.Axes | None = None, which = AxisWhich.BOTH):
+	"""Remove the top and right spine
+	
+	Parameters
+	----------
+	ax : matplotlib.axes.Axes or None
+		axes to use, if set to ``None`` then ``plt.gca()`` is used
+	which : str or AxisWhich, optional
+		which axis to despine, by default AxisWhich.BOTH
+	"""
+
+	if ax is None:
+		ax = plt.gca()
+
+	if not isinstance(which, AxisWhich):
+		which = AxisWhich(which)
+
+	if which is AxisWhich.X or which is AxisWhich.BOTH:
+		ax.spines.top.set_visible(False)
+
+	if which is AxisWhich.Y or which is AxisWhich.BOTH:
+		ax.spines.right.set_visible(False)
 
 def line_guide(ax: matplotlib.axes.Axes, pad: float, plot_kwargs: dict = {}):
 	# TODO

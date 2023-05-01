@@ -161,6 +161,27 @@ Getting your hands dirty
 .. image:: demo/fig5.png
 
 
+It is also possible to use ``matplotlib_tufte`` without using ``setup``
+
+::
+
+	# demo/demo_nosetup.py
+
+	from matplotlib_tufte import *
+	import matplotlib.pyplot as plt
+
+	# by default, will use gca
+	# this is however discouraged
+	plt.plot([0,1,2],[-2,4,5])
+	despine()
+	data_lim()
+	breathe()
+	plt.savefig('fig_nosetup.png')
+
+
+.. image:: demo/fig_nosetup.png
+
+
 TODO
 ----
 

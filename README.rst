@@ -21,22 +21,29 @@ Usage
 
 Changes made by the custom style :
 
-- better readability using a serif font
-- Latin Modern Roman font
-	- applied to all text (ticks, labels, legends, titles, etc.)
-	- in math mode, gives LaTeX-like math results, without needing a LaTeX installation
-- smaller figures (increase data density)
-	- figsize is defaulted to (4, 3)
-	- tight layout applied automatically
-- thinner axes to put emphasis on data ink
-- remove chartjunk and non-data ink
-	- remove top and right spines
-	- remove legend fancybox and frame
-- insert black as the first color of the cycler
+* better readability using a serif font
+* Latin Modern Roman font
+
+  * applied to all text (ticks, labels, legends, titles, etc.)
+  * in math mode, gives LaTeX-like math results, without needing a LaTeX installation
+	
+* smaller figures (increase data density)
+
+  * figsize is defaulted to (4, 3)
+  * tight layout applied automatically
+	
+* thinner axes to put emphasis on data ink
+
+* remove chartjunk and non-data ink
+
+  * remove top and right spines
+  * remove legend fancybox and frame
+	
+* insert black as the first color of the cycler
+
+Documentation for ``breathe``
 
 ::
-
-	Documentation for ``breathe``
 
 	Add some space between the axes and the spines
 
@@ -50,10 +57,9 @@ Changes made by the custom style :
 	pad_frac_end : float, optional
 		space to add to the end of the axis, as a fraction of the data span, by default 0.04
 
+Documentation for ``data_lim``
 
 ::
-
-	Documentation for ``data_lim``
 
 	Sets the axis to use the limits of the data
 

@@ -46,19 +46,15 @@ def breathe(ax: matplotlib.axes.Axes | None = None, which = AxisWhich.BOTH, pad_
 
 	if which is AxisWhich.X or which is AxisWhich.BOTH:
 		limx = ax.get_xlim()
-		ax.spines['bottom'].set_bounds(limx[0], limx[1])
 		span = limx[1] - limx[0]
 		m0 = limx[0] - span*pad_frac_start
-		m1 = limx[1] + span*pad_frac_end
-		ax.set_xlim((m0, m1))
+		ax.spines.bottom.set_position(('data', m0))
 
 	if which is AxisWhich.Y or which is AxisWhich.BOTH:
 		limy = ax.get_ylim()
-		ax.spines['left'].set_bounds(limy[0], limy[1])
 		span = limy[1] - limy[0]
 		m0 = limy[0] - span*pad_frac_start
-		m1 = limy[1] + span*pad_frac_end
-		ax.set_ylim((m0, m1))
+		ax.spines.left.set_position(('data', m0))
 
 def data_lim(ax: matplotlib.axes.Axes | None = None, which = AxisWhich.BOTH):
 	"""Sets the axis to use the limits of the data

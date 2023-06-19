@@ -11,6 +11,8 @@ def setup():
 
 	try:
 		# Attempt to import standard TeX font
+		for fontpath in (pathbase / 'newcomputermodern/otf').glob('*.otf'):
+			matplotlib.font_manager.fontManager.addfont(str(fontpath))  # matplotlib doesn't like non-string paths
 		for fontpath in (pathbase / 'lm2.004otf').glob('*.otf'):
 			matplotlib.font_manager.fontManager.addfont(str(fontpath))  # matplotlib doesn't like non-string paths
 	except Exception as e:
@@ -23,7 +25,7 @@ class AxisWhich(Enum):
 	Y = 'y'
 	BOTH = 'both'
 
-def breathe(ax: matplotlib.axes.Axes | None = None, which = AxisWhich.BOTH, pad_frac_start = 0.04, pad_frac_end = 0.04):
+def breathe(ax: matplotlib.axes.Axes | None = None, which = AxisWhich.BOTH, pad_frac: float = 0.04):
 	"""Add some space between the axes and the spines
 
 	Parameters
@@ -32,10 +34,8 @@ def breathe(ax: matplotlib.axes.Axes | None = None, which = AxisWhich.BOTH, pad_
 		axes to use, if set to ``None`` then ``plt.gca()`` is used
 	which : str or AxisWhich, optional
 		which axis to apply the spacing on, by default AxisWhich.BOTH
-	pad_frac_start : float, optional
-		space to add to the start of the axis, as a fraction of the data span, by default 0.04
-	pad_frac_end : float, optional
-		space to add to the end of the axis, as a fraction of the data span, by default 0.04
+	pad_frac : float, optional
+		space to add between the plot and the axis, as a fraction of the data span, by default 0.04
 	"""
 
 	if ax is None:
@@ -45,15 +45,15 @@ def breathe(ax: matplotlib.axes.Axes | None = None, which = AxisWhich.BOTH, pad_
 		which = AxisWhich(which)
 
 	if which is AxisWhich.X or which is AxisWhich.BOTH:
-		limx = ax.get_xlim()
-		span = limx[1] - limx[0]
-		m0 = limx[0] - span*pad_frac_start
+		limy = ax.get_ylim()
+		span = limy[1] - limy[0]
+		m0 = limy[0] - span*pad_frac
 		ax.spines.bottom.set_position(('data', m0))
 
 	if which is AxisWhich.Y or which is AxisWhich.BOTH:
-		limy = ax.get_ylim()
-		span = limy[1] - limy[0]
-		m0 = limy[0] - span*pad_frac_start
+		limx = ax.get_xlim()
+		span = limx[1] - limx[0]
+		m0 = limx[0] - span*pad_frac
 		ax.spines.left.set_position(('data', m0))
 
 def data_lim(ax: matplotlib.axes.Axes | None = None, which = AxisWhich.BOTH):

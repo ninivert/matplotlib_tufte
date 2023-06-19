@@ -17,12 +17,12 @@ Installation
 Usage
 -----
 
-``setup`` tries to load the Latin Modern Roman font (comes packaged with ``matplotlib_tufte``) and the ``tufte.mplstyle`` stylesheet.
+``setup`` tries to load the New Computer Modern font (comes packaged with ``matplotlib_tufte``) and the ``tufte.mplstyle`` stylesheet.
 
 Changes made by the custom style :
 
 * better readability using a serif font
-* Latin Modern Roman font
+* New Computer Modern (used to be : Latin Modern Roman) font
 
   * applied to all text (ticks, labels, legends, titles, etc.)
   * in math mode, gives LaTeX-like math results, without needing a LaTeX installation

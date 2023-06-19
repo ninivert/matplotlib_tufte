@@ -182,6 +182,12 @@ It is also possible to use ``matplotlib_tufte`` without using ``setup``
 .. image:: demo/fig_nosetup.png
 
 
+Changelog
+---------
+
+v0.2: changed default font from "Latin Modern Roman" to "New Computer Modern", which is more readable at smaller sizes.
+
+
 TODO
 ----
 

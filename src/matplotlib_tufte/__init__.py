@@ -5,20 +5,26 @@ import matplotlib.pyplot as plt  # needs this to access fontManager
 
 __all__ = ['setup', 'breathe', 'data_lim', 'despine']
 
+_INIT_DONE = False
+
 def setup():
-	import pathlib
-	pathbase = pathlib.Path(__file__).parent
+	global _INIT_DONE
+	if not _INIT_DONE:
+		import pathlib
+		pathbase = pathlib.Path(__file__).parent
 
-	try:
-		# Attempt to import standard TeX font
-		for fontpath in (pathbase / 'newcomputermodern/otf').glob('*.otf'):
-			matplotlib.font_manager.fontManager.addfont(str(fontpath))  # matplotlib doesn't like non-string paths
-		for fontpath in (pathbase / 'lm2.004otf').glob('*.otf'):
-			matplotlib.font_manager.fontManager.addfont(str(fontpath))  # matplotlib doesn't like non-string paths
-	except Exception as e:
-		warnings.warn(f'could not setup fonts : {e}')
+		try:
+			# Attempt to import standard TeX font
+			for fontpath in (pathbase / 'newcomputermodern/otf').glob('*.otf'):
+				matplotlib.font_manager.fontManager.addfont(str(fontpath))  # matplotlib doesn't like non-string paths
+			for fontpath in (pathbase / 'lm2.004otf').glob('*.otf'):
+				matplotlib.font_manager.fontManager.addfont(str(fontpath))  # matplotlib doesn't like non-string paths
+		except Exception as e:
+			warnings.warn(f'could not setup fonts : {e}')
 
-	plt.style.use(pathbase / 'tufte.mplstyle')
+		plt.style.use(pathbase / 'tufte.mplstyle')
+
+		_INIT_DONE = True
 
 class AxisWhich(Enum):
 	X = 'x'
